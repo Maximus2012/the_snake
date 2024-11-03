@@ -33,30 +33,117 @@ SPEED = 20
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), 0, 32)
 
 # Заголовок окна игрового поля:
-pygame.display.set_caption('Змейка')
+pygame.display.set_caption("Змейка")
 
 # Настройка времени:
 clock = pygame.time.Clock()
 
 
 # Тут опишите все классы игры.
-...
+class GameObject:
+    def __init__(self, position, body_color):
+        self.positions = position
+        self.body_color = body_color
 
+    def draw(self):
+        pass
+
+
+class Apple(GameObject):
+
+    def __init__(self, position, body_color=(255, 0, 0)):
+        super().__init__(position, body_color)
+        self.randomize_position()
+        
+
+    def randomize_position(self):
+        self.positions = (randint(0, GRID_WIDTH) * GRID_SIZE,  randint(0, GRID_WIDTH) * GRID_SIZE)
+  
+
+    def draw(self):
+        rect = pygame.Rect(self.positions, (GRID_SIZE, GRID_SIZE))
+        pygame.draw.rect(screen, self.body_color, rect)
+        pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
+
+
+class Snake(GameObject):
+    def __init__(
+        self,
+        length,
+        positions,
+        direction,
+        next_direction=None,
+        body_color=(0, 255, 0),
+        last=None
+    ):
+        super().__init__(positions, body_color)
+        self.length = length
+        self.direction = direction
+        self.next_direction = next_direction
+        self.last= last
+    
+    def update_direction(self):
+        if self.next_direction:
+            self.direction = self.next_direction
+            self.next_direction = None
+
+    def move(self, position):
+        start_snake_lentgh = self.length
+        self.positions.insert(position, 0)
+        end_snake_lentgh = self.length
+        if end_snake_lentgh == start_snake_lentgh:
+            self.positions.pop()
+
+    def draw(self):
+        print(self.positions)
+        for position in self.positions[::-1]: #???
+            rect = (pygame.Rect(position, (GRID_SIZE, GRID_SIZE)))
+            pygame.draw.rect(screen, self.body_color, rect)
+            pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
+            print(position)
+        # Отрисовка головы змейки
+
+        head_rect = pygame.Rect(self.positions[0], (GRID_SIZE, GRID_SIZE))
+        pygame.draw.rect(screen, self.body_color, head_rect)
+        pygame.draw.rect(screen, BORDER_COLOR, head_rect, 1)
+
+        # Затирание последнего сегмента
+        if self.last:
+            last_rect = pygame.Rect(self.last, (GRID_SIZE, GRID_SIZE))
+            pygame.draw.rect(screen, BOARD_BACKGROUND_COLOR, last_rect)
+
+    def get_head_position(self):
+        return self.position[0]
+    
+    def reset(self):
+        self.length = 1
+        self.positions = [GRID_WIDTH/ 2, GRID_HEIGHT/2]
+        self.direction = choice(UP,DOWN,LEFT,RIGHT)
 
 def main():
     # Инициализация PyGame:
     pygame.init()
+    running = True
     # Тут нужно создать экземпляры классов.
-    ...
-
-    # while True:
-    #     clock.tick(SPEED)
-
+    apple = Apple(1)
+    snake = Snake(1,[(180, 140), (200,140), (220, 140), (240, 140),(260, 140), (260, 160), (260, 180),(260, 200)],(0,-1))
+    c=1
+    while running:
+        clock.tick(SPEED)
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+        apple.draw()
+        if c==1:
+            snake.draw()
+            c+=1
+        pygame.display.update()
         # Тут опишите основную логику игры.
         # ...
+    pygame.display.update()
+    pygame.quit()
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
 
 
