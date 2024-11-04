@@ -205,10 +205,11 @@ def main():
         clock.tick(SPEED)
         handle_keys(snake)
         snake_positions = (snake.positions[-1][0], snake.positions[-1][1])
+        snake_move = snake.position[0]
         snake.move(
             (
-            snake.positions[0][0] + snake.direction[0] * 20,
-            snake.positions[0][1] + snake.direction[1] * 20,
+                snake_move[0] + snake.direction[0] * 20,
+                snake_move[1] + snake.direction[1] * 20,
             )
         )
         snake.update_direction()
