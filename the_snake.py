@@ -191,7 +191,6 @@ def handle_keys(game_object):
                 game_object.next_direction = RIGHT
 def main():
     "Основная функция игры."
-
     pygame.init()
 
 
