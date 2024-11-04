@@ -44,15 +44,18 @@ class GameObject:
     """Базовый класс для игровых объектов (яблоко, змейка)."""
 
     def __init__(
-        self, position=[(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)], body_color=None
+        self, position=[(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)],
+        body_color=None
     ):
         """Инициализация объекта с позицией и цветом."""
         self.position = position
         self.body_color = body_color
 
     def draw(self):
-        """Метод для отрисовки объекта
-        (переопределяется в дочерних классах)."""
+        """
+        Метод для отрисовки объекта
+        (переопределяется в дочерних классах).
+        """
         pass
 
 
@@ -184,9 +187,10 @@ def handle_keys(game_object):
                 game_object.next_direction = LEFT
             elif event.key == pygame.K_RIGHT and game_object.direction != LEFT:
                 game_object.next_direction = RIGHT
+                
+                
 def main():
-    """main func"""
-    
+    """Main func."""
     pygame.init()
     running = True
     apple = Apple(1)
@@ -203,8 +207,8 @@ def main():
         snake_positions = (snake.positions[-1][0], snake.positions[-1][1])
         snake.move(
             (
-                snake.positions[0][0] + snake.direction[0] * 20,
-                snake.positions[0][1] + snake.direction[1] * 20,
+        snake.positions[0][0] + snake.direction[0] * 20,
+        snake.positions[0][1] + snake.direction[1] * 20,
             )
         )
         snake.update_direction()
