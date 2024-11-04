@@ -41,17 +41,12 @@ clock = pygame.time.Clock()
 
 # Тут опишите все классы игры.
 class GameObject:
-    "Базовый класс для игровых объектов (яблоко, змейка)."
+    """Базовый класс для игровых объектов (яблоко, змейка)."""
 
     def __init__(
         self, position=[(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)], body_color=None
     ):
-        """
-        Инициализация объекта с позицией и цветом.
-
-        :param position: начальная позиция объекта (список).
-        :param body_color: цвет объекта.
-        """
+        """Инициализация объекта с позицией и цветом."""
         self.position = position
         self.body_color = body_color
 
@@ -62,7 +57,7 @@ class GameObject:
 
 
 class Apple(GameObject):
-    "Класс яблока, которое нужно есть змейке."
+    """Класс яблока, которое нужно есть змейке."""
 
     def __init__(
         self,
@@ -96,7 +91,7 @@ class Apple(GameObject):
 
 
 class Snake(GameObject):
-    "Класс змейки, управляемой игроком."
+    """Класс змейки, управляемой игроком."""
 
     def __init__(
         self,
@@ -192,6 +187,8 @@ def handle_keys(game_object):
 
 
 def main():
+    """main func"""
+
 
     pygame.init()
     running = True
@@ -205,7 +202,6 @@ def main():
     screen.fill(BOARD_BACKGROUND_COLOR)
     while running:
         clock.tick(SPEED)
-
         handle_keys(snake)
         snake_positions = (snake.positions[-1][0], snake.positions[-1][1])
         snake.move(
@@ -216,7 +212,6 @@ def main():
         )
         snake.update_direction()
         apple.draw()
-        # Проверка на столкновение с собой
         if snake.get_head_position() == snake.positions[-1] and snake.length > 3:
             print("Length 1")
             snake.length = 1
@@ -224,7 +219,6 @@ def main():
             snake.positions.clear()
             snake.positions.append(snake_position_first)
             screen.fill(BOARD_BACKGROUND_COLOR)
-        # Проверка на столкновение с телом
         if snake.get_head_position() in snake.positions[1:]:
             print("loose")
             snake.reset()
