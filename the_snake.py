@@ -193,7 +193,7 @@ def handle_keys(game_object):
 
 def main():
     "Основная функция игры."
-    # Инициализация PyGame:
+
     pygame.init()
     running = True
     # Создание экземпляров классов
