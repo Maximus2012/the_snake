@@ -41,9 +41,7 @@ clock = pygame.time.Clock()
 
 # Тут опишите все классы игры.
 class GameObject:
-    """
-    Базовый класс для игровых объектов (яблоко, змейка).
-    """
+    "Базовый класс для игровых объектов (яблоко, змейка)."
 
     def __init__(
         self, position=[(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)], body_color=None
@@ -58,14 +56,13 @@ class GameObject:
         self.body_color = body_color
 
     def draw(self):
-        """Метод для отрисовки объекта (переопределяется в дочерних классах)."""
+        """Метод для отрисовки объекта
+        (переопределяется в дочерних классах)."""
         pass
 
 
 class Apple(GameObject):
-    """
-    Класс яблока, которое нужно есть змейке.
-    """
+    "Класс яблока, которое нужно есть змейке."
 
     def __init__(
         self,
@@ -86,7 +83,6 @@ class Apple(GameObject):
 
     def randomize_position(self):
         """Метод для случайного изменения позиции яблока на игровом поле."""
-
         self.positions = (
             randint(0, GRID_WIDTH - 20) * GRID_SIZE,
             randint(0, GRID_HEIGHT - 20) * GRID_SIZE,
@@ -100,9 +96,7 @@ class Apple(GameObject):
 
 
 class Snake(GameObject):
-    """
-    Класс змейки, управляемой игроком.
-    """
+    "Класс змейки, управляемой игроком."
 
     def __init__(
         self,
@@ -234,7 +228,7 @@ def main():
             snake.positions.clear()
             snake.positions.append(snake_position_first)
             screen.fill(BOARD_BACKGROUND_COLOR)
-        # Проверка на столкновение с телом змейки
+        # Проверка на столкновение с телом
         if snake.get_head_position() in snake.positions[1:]:
             print("loose")
             snake.reset()
