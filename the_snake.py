@@ -187,8 +187,8 @@ def handle_keys(game_object):
                 game_object.next_direction = LEFT
             elif event.key == pygame.K_RIGHT and game_object.direction != LEFT:
                 game_object.next_direction = RIGHT
-                
-                
+
+
 def main():
     """Main func."""
     pygame.init()
@@ -207,13 +207,14 @@ def main():
         snake_positions = (snake.positions[-1][0], snake.positions[-1][1])
         snake.move(
             (
-        snake.positions[0][0] + snake.direction[0] * 20,
-        snake.positions[0][1] + snake.direction[1] * 20,
+            snake.positions[0][0] + snake.direction[0] * 20,
+            snake.positions[0][1] + snake.direction[1] * 20,
             )
         )
         snake.update_direction()
         apple.draw()
-        if snake.get_head_position() == snake.positions[-1] and snake.length > 3:
+        snake_position = snake.get_head_position()
+        if snake_position == snake.positions[-1] and snake.length > 3:
             print("Length 1")
             snake.length = 1
             snake_position_first = snake.positions[0]
