@@ -190,8 +190,19 @@ def handle_keys(game_object):
             elif event.key == pygame.K_RIGHT and game_object.direction != LEFT:
                 game_object.next_direction = RIGHT
 def main():
-    "Основная функция игры."
+
     pygame.init()
+    running = True
+    apple = Apple(1)
+    snake = Snake(
+        1,
+        [],
+        (0, -1),
+    )
+    snake.reset()
+    screen.fill(BOARD_BACKGROUND_COLOR)
+    while running:
+        clock.tick(SPEED)
 
 
         handle_keys(snake)
