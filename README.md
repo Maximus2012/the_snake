@@ -17,7 +17,7 @@
 
 ### Склонируйте репозиторий 
 ```sh
-git clone https://github.com/Maximus2012/django_sprint1.git
+https://github.com/Maximus2012/the_snake.git
 ```
 
 ### Установите виртуальную среду
