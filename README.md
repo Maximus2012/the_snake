@@ -40,7 +40,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### Запусииие main.py
+### Запустите main.py
 
 
 ## To do
